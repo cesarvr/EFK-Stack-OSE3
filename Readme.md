@@ -10,7 +10,7 @@ The important part here is how we expose the logger API and the need to stream t
 
 #### getBunyanLogger
 
-Handle the instanciation and configuration of [Bunyan](https://github.com/trentm/node-bunyan) Logger API, I prefer this one because is almost zero-configuration needed and ready to work.  
+Handle the instanciation and configuration of [Bunyan](https://github.com/trentm/node-bunyan) Logger API, - *I prefer this one because is almost zero-configuration needed and ready to work*.  
 
 #### getWinstonLogger
 
