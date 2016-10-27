@@ -21,7 +21,18 @@ Handle the instanciation and configuration of [Winston](https://github.com/winst
 At the end our microservices consume this the following way:
 
 ```javascript
-let logger = require('util').Logger;
+
+//util.js
+
+module.exports = {
+  ...
+  Logger: getBunyanLogger(), // getWinstonLogger()
+  ...
+}
+
+// usage
+
+let logger = require('./lib/util').Logger;
 logger.info('hello world');
 
 // {"name":"host",
@@ -30,3 +41,6 @@ logger.info('hello world');
 //"msg":"hello world",
 //"time":"2016-10-27T13:23:58.975Z","v":0}
 ```
+
+
+[Application example](https://bitbucket.org/bankaudigroup/cesar-template).
