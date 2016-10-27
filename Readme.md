@@ -8,6 +8,10 @@ The important part here is how we expose the logger API and the need to stream t
 
 ### Exposing the API
 
+#### Dependencies
+
+This example use a library called [sdiscovery](https://www.npmjs.com/package/sdiscovery) written by yours truly, is not obligatory to use, but I just use **whoami** method to get hostname and use this information to identify our microservice in the [node](https://docs.openshift.com/enterprise/3.0/admin_guide/manage_nodes.html).
+
 #### getBunyanLogger
 
 Handle the instanciation and configuration of [Bunyan](https://github.com/trentm/node-bunyan) Logger API, - *I prefer this one because is almost zero-configuration needed and ready to work*.  
@@ -17,8 +21,9 @@ Handle the instanciation and configuration of [Bunyan](https://github.com/trentm
 Handle the instanciation and configuration of [Winston](https://github.com/winstonjs/winston) Logger API. Less trivial but support more configurations.
 
 
+#### Example
 
-At the end our microservices consume this the following way:
+At the end in our code we consume this the following way:
 
 ```javascript
 
