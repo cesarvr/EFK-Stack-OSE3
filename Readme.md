@@ -1,9 +1,10 @@
 # Logging solutions for Node.js
-Here are will show different strategies to and use logging API.
+Here are some examples to start using some of the node.js logging API.
+
 
 ## Util Module
 
-The important part here is how we expose the logger API, and we need to stream to stdout of our container, so OSE3 logger infrastructure (EFK)[https://bitbucket.org/bankaudigroup/cesar-logging-infra] can take care of this.
+The important part here is how we expose the logger API and the need to stream to the stdout of our container, so OSE3 logging infrastructure [EFK](https://bitbucket.org/bankaudigroup/cesar-logging-infra) can gather the information and make them available for search through [Kibanna](https://www.elastic.co/products/kibana).
 
 ### Exposing the API
 
@@ -29,4 +30,3 @@ logger.info('hello world');
 //"msg":"hello world",
 //"time":"2016-10-27T13:23:58.975Z","v":0}
 ```
- 
