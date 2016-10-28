@@ -1,6 +1,9 @@
 ## Logging Infrastructure for Microservices.
 
 
+
+
+
 ### Overview
 
  Application developers can view the logs of the projects for which they have view access. The EFK stack aggregates logs from hosts and applications, whether coming from multiple containers or even deleted pods.
@@ -55,17 +58,9 @@ $ oc delete secret logging-fluentd logging-elasticsearch \
 
 ```
 
-# Documentation 
+# Documentation
 
+## Kibanna Documentation    
 
-## Kibanna Setup   
-   
-- Configuration file in the container is located in: /opt/app-root/src/config/kibana.yml 
-
-- [Documentantion](https://www.elastic.co/guide/en/kibana/current/setup.html)
-
-  
-
-
-
-
+- [Setup](https://www.elastic.co/guide/en/kibana/current/setup.html)
+- [Getting Started](https://www.elastic.co/guide/en/kibana/current/getting-started.html)
