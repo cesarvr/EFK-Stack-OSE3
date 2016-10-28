@@ -1,51 +1,71 @@
-# Logging solutions for Node.js
-Here are some examples to start using some of the node.js logging API.
+## Logging Infrastructure for Microservices.
 
 
-## Util Module
+### Overview
 
-The important part here is how we expose the logger API and the need to stream to the stdout of our container, so OSE3 logging infrastructure [EFK](https://bitbucket.org/bankaudigroup/cesar-logging-infra) can gather the information and make them available for search through [Kibanna](https://www.elastic.co/products/kibana).
-
-### Exposing the API
-
-#### Dependencies
-
-This example use a library called [sdiscovery](https://www.npmjs.com/package/sdiscovery) written by yours truly, is not obligatory to use, but I just use **whoami** method to get hostname and use this information to identify our microservice in the [node](https://docs.openshift.com/enterprise/3.0/admin_guide/manage_nodes.html).
-
-#### getBunyanLogger
-
-Handle the instanciation and configuration of [Bunyan](https://github.com/trentm/node-bunyan) Logger API, - *I prefer this one because is almost zero-configuration needed and ready to work*.  
-
-#### getWinstonLogger
-
-Handle the instanciation and configuration of [Winston](https://github.com/winstonjs/winston) Logger API. Less trivial but support more configurations.
+ Application developers can view the logs of the projects for which they have view access. The EFK stack aggregates logs from hosts and applications, whether coming from multiple containers or even deleted pods.
 
 
-#### Example
+ The EFK stack is a modified version of the ELK stack and is comprised of:
 
-At the end in our code we consume this the following way:
+ - [Elasticsearch](https://www.elastic.co/products/elasticsearch): An object store where all logs are stored.
 
-```javascript
+ - [Fluentd](http://www.fluentd.org/architecture): Gathers logs from nodes and feeds them to Elasticsearch.
 
-//util.js
+ - [Kibana](https://www.elastic.co/guide/en/kibana/current/introduction.html): A web UI for Elasticsearch.
 
-module.exports = {
-  ...
-  Logger: getBunyanLogger(), // getWinstonLogger()
-  ...
-}
 
-// usage
+## Deployment
 
-let logger = require('./lib/util').Logger;
-logger.info('hello world');
+First create the user and assign the right permissions, to all the components of the stack.
 
-// {"name":"host",
-//"hostname":"vagrant-ubuntu-trusty-64",
-// "pid":2090,"level":30,
-//"msg":"hello world",
-//"time":"2016-10-27T13:23:58.975Z","v":0}
+```sh
+# Remember to change the project names to reflect the yours.
+  sh scripts/pre-deployment
+```
+
+Proceed to execute the script to install all the deployment, but before this make sure you install
+the [origin-aggregated-logging](https://github.com/openshift/origin-aggregated-logging/tree/master/deployer).
+
+```sh
+$ oc apply -n openshift -f https://raw.githubusercontent.com/openshift/origin-aggregated-logging/master/deployer/deployer.yaml
+```
+
+Then execute the installation script
+
+```sh
+  sh scripts/install-aggregates-logging.sh
 ```
 
 
-[Application example](https://bitbucket.org/bankaudigroup/cesar-template).
+# Cleanup
+
+You can remove everything generated during the deployment while leaving other project contents intact:
+
+
+```sh
+$ oc delete all --selector logging-infra=kibana
+$ oc delete all --selector logging-infra=fluentd
+$ oc delete all --selector logging-infra=elasticsearch
+$ oc delete all --selector logging-infra=curator
+$ oc delete all,sa,oauthclient --selector logging-infra=support
+$ oc delete secret logging-fluentd logging-elasticsearch \
+    logging-es-proxy logging-kibana logging-kibana-proxy \
+    logging-kibana-ops-proxy
+
+```
+
+# Documentation 
+
+
+## Kibanna Setup   
+   
+- Configuration file in the container is located in: /opt/app-root/src/config/kibana.yml 
+
+- [Documentantion](https://www.elastic.co/guide/en/kibana/current/setup.html)
+
+  
+
+
+
+
