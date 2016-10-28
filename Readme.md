@@ -1,7 +1,7 @@
-## Logging Infrastructure for Microservices.
+## Logging Infrastructure for Microservices in OSE3/Kubernetes.
 
 
-
+[end result](https://github.com/cesarvr/EFK-Stack-OSE3/blob/master/docs/demo.gif)
 
 
 ### Overview
