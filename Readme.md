@@ -57,9 +57,9 @@ $ oc delete secret logging-fluentd logging-elasticsearch \
 
 ```
 
-# Documentation
+# More information
 
-## Kibanna Documentation    
+## Kibanna    
 
 - [Setup](https://www.elastic.co/guide/en/kibana/current/setup.html)
 - [Getting Started](https://www.elastic.co/guide/en/kibana/current/getting-started.html)
